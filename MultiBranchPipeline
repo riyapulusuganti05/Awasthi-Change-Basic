@@ -57,7 +57,7 @@ pipeline {
 	  		//}
            steps {
               
-              //snDevOpsChange()
+              snDevOpsChange()
                
 
 	        	//withSonarQubeEnv('sonarQube_local') {			
@@ -75,7 +75,7 @@ pipeline {
             //environment {
 	    		 //SCANNER_HOME = tool 'sonarScanner'
 	  		//}
-           steps {
+          // steps {
               
               //snDevOpsChange()
                
@@ -86,7 +86,7 @@ pipeline {
        
 				//}
 	       
-           }
+         //  }
         }
         
         stage('Deliver2Patch-1') {
@@ -96,7 +96,7 @@ pipeline {
             //environment {
 	    		 //SCANNER_HOME = tool 'sonarScanner'
 	  		//}
-           steps {
+           //steps {
               
               //snDevOpsChange()
                
@@ -107,7 +107,7 @@ pipeline {
        
 				//}
 	       
-           }
+          // }
         }
         
         stage('scratch/monatest') { 
