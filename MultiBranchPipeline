@@ -1,129 +1,30 @@
 pipeline {
-   agent any
-   tools {
-        maven 'Maven'
+    agent any
 
-    }
-   stages {
-        stage('Build1') {
+ 
+
+    stages {
+        stage('Build') {
             steps {
-               
-                sh 'mvn -B -DskipTests clean compile'
+                echo 'Build Step -- Testing1 '
             }
         }
-        stage('Test') { 
-           	//environment {
-	    		 //SCANNER_HOME = tool 'sonarScanner'
-	  		//}
-           steps {
-              
-               sh 'mvn test'
-               
-               //withSonarQubeEnv('sonar_cloud') {
-			      //sh '${SCANNER_HOME}/bin/sonar-scanner -Dproject.settings=${SCANNER_HOME}/conf/qa-sonar-scanner-cloud.properties'
-		       
-        		//}
-	        	//withSonarQubeEnv('sonarQube_local') {		
-					//sh 'export SONAR_SCANNER_OPTS="-Xms512m -Xmx1024m -XX:+HeapDumpOnOutOfMemoryError"'
-	       			//	sh '${SCANNER_HOME}/bin/sonar-scanner'
-       
-				//}
-	       
-           }
-            post {
-                always {
-                    junit '**/target/surefire-reports/*.xml' 
+        stage('Test') {
+            steps {
+                echo "Test Step  -- Testing2  pipeliname=====  ${env.JOB_NAME}    branchName == ${env.BRANCH_NAME}"
+                snDevOpsChange();
+                script {
+                   number=snDevOpsGetChangeNumber (changeDetails: """{ "pipeline_name": "github_multi_branch_pipeline/release/2023-06--Test2", "build_number": "${env.BUILD_NUMBER}", "stage_name": "Test", "branch_name": "${env.BRANCH_NAME}" }""");                  
+                    echo "Change Number =="+number;
+                 echo "Chnage nUMBER===="+number
                 }
             }
         }
-    
-       
+        stage('Deploy') {
+            steps {
+                echo 'Deploy Step'
 
-       stage('Deploy') {
-             steps{
-                  snDevOpsStep (ignoreErrors:true)
-                  snDevOpsChange()
-                  echo 'deployment started'      
-              }
-      }
-      
-      stage('Deliver2Dev') {
-      
-            when {
-                branch 'dev' 
-            }
-            //environment {
-	    		 //SCANNER_HOME = tool 'sonarScanner'
-	  		//}
-           steps {
-              
-              snDevOpsChange()
-               
-
-	        	//withSonarQubeEnv('sonarQube_local') {			
-					//sh 'export SONAR_SCANNER_OPTS="-Xms512m -Xmx1024m -XX:+HeapDumpOnOutOfMemoryError"'
-	       				//sh '${SCANNER_HOME}/bin/sonar-scanner'
-       
-				//}
-	       
-           }
-        }
-        stage('Deliver2Feature1') {
-            when {
-                branch 'feature1' 
-            }
-            //environment {
-	    		 //SCANNER_HOME = tool 'sonarScanner'
-	  		//}
-          // steps {
-              
-              //snDevOpsChange()
-               
-
-	        	//withSonarQubeEnv('sonarQube_local') {			
-					//sh 'export SONAR_SCANNER_OPTS="-Xms512m -Xmx1024m -XX:+HeapDumpOnOutOfMemoryError"'
-	       				//sh '${SCANNER_HOME}/bin/sonar-scanner'
-       
-				//}
-	       
-         //  }
-        }
-        
-        stage('Deliver2Patch-1') {
-            when {
-                branch 'patch-1' 
-            }
-            //environment {
-	    		 //SCANNER_HOME = tool 'sonarScanner'
-	  		//}
-           //steps {
-              
-              //snDevOpsChange()
-               
-
-	        	//withSonarQubeEnv('sonarQube_local') {		
-					//sh 'export SONAR_SCANNER_OPTS="-Xms512m -Xmx1024m -XX:+HeapDumpOnOutOfMemoryError"'
-	       				//sh '${SCANNER_HOME}/bin/sonar-scanner'
-       
-				//}
-	       
-          // }
-        }
-        
-        stage('scratch/monatest') { 
-
-           steps {
-             	 echo 'running UAT stage'
-               sh 'mvn test'
-               
-	       
-           }
-            post {
-                always {
-                    junit '**/target/surefire-reports/*.xml' 
-                }
             }
         }
-      
-  }
+    }
 }
