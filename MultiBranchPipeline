@@ -42,13 +42,9 @@ pipeline {
            steps {
              	 echo 'mona is running multi branch'
                sh 'mvn test'
-               
-	       
-           }
-            post {
-                always {
-                    junit '**/target/surefire-reports/*.xml' 
-                }
+
+}
+}
 
        stage('Deploy') {
              steps{
