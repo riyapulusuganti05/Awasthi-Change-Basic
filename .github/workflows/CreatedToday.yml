@@ -164,13 +164,13 @@ jobs:
             buildVersion: Veracode Scan name /build version and is optional. This attribute is applicable only for Veracode.
             securityToolId: Security tool onboarded in ServiceNow (sys_id of the onboarded security tool) and is optional.
 
-    ServiceNowSecurityScanResults:
+    ServiceNowSecurityScanResults1:
     # type of machine to run the job on
     runs-on: ubuntu-latest
     name: ServiceNow Security Scan Results
     needs: sonarScan
     steps:
-      - name: ServiceNow DevOps Security Results
+      - name: ServiceNow DevOps Security Results1
         uses: ServiceNow/servicenow-devops-security-result@dev
         with:
             # DevOps Integration Token of GitHub tool created in ServiceNow instance for token based authentication.
