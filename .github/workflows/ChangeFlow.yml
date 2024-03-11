@@ -166,7 +166,7 @@ jobs:
 
   registerPackage:
     name: 'Register Package'
-    needs: [registerArtifact]
+    needs: [ServiceNowSecurityScanResults]
     runs-on: ubuntu-latest
     steps:
     - name: ServiceNow DevOps Register Package
@@ -199,7 +199,7 @@ jobs:
 
   change:
     name: Change Request
-    needs: sonarScan
+    needs: registerPackage
     runs-on: ubuntu-latest
     steps:     
       - name: ServiceNow DevOps Change Attributes
@@ -252,7 +252,7 @@ jobs:
           # Github Context
           context-github: ${{ toJSON(github) }}
           # The inputs to identify change at Servicenow and GET it.
-          change-details: '{"build_number":"","pipeline_name":"","stage_name":"Deploy"}'
+          change-details: '{"build_number":"","pipeline_name":"","stage_name":"Change Request"}'
 
       # - name: Output of ServiceNow DevOps Get Change
       #   run: echo 'Output of ServiceNow DevOps Get Change is -> change-request-number = ${{ steps.get_change.outputs.change-request-number }}' >> $GITHUB_OUTPUT
