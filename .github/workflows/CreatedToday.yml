@@ -56,8 +56,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.0.0
-      # - name: ServiceNow DevOps Sonar Scan Results
-      - name: Sonar One
+      - name: ServiceNow DevOps Sonar Scan Results
+      # - name: Sonar One
         uses: ServiceNow/servicenow-devops-sonar@v3.1.0
         with:
           instance-url: '${{ secrets.SN_INSTANCE_URL }}'
