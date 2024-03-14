@@ -137,7 +137,7 @@ jobs:
          # Sonar Project Key
          sonar-project-key: ${{ secrets.SONAR_PROJECT_KEY }}
 
-   sonarScan:
+  sonarScan:
    name: 'Sonar Scan'
    needs: sonarScan
    runs-on: ubuntu-latest
