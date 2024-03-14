@@ -1,5 +1,5 @@
-name: CreateChangeToday
-'on': workflow_dispatch
+name: GitHub Change Workflow with SNOW custom tasks
+on: workflow_dispatch
 jobs:
   build:
     name: Build
