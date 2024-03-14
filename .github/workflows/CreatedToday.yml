@@ -149,7 +149,32 @@ jobs:
             applicable only for Veracode.
           securityToolId: >-
             Security tool onboarded in ServiceNow (sys_id of the onboarded
-            security tool) and is optional.          
+            security tool) and is optional.    
+
+  ServiceNowSecurityScanResults3:
+     runs-on: ubuntu-latest
+     name: ServiceNow Security Scan Results3
+     needs: ServiceNowSecurityScanResults
+     steps:
+      - name: ServiceNow DevOps Security Results3
+        uses: ServiceNow/servicenow-devops-security-result@v3.1.0
+        with:
+          devops-integration-token: '${{ secrets.SN_DEVOPS_TOKEN }}'
+          instance-url: '${{ secrets.SN_INSTANCE_URL }}'
+          tool-id: '${{ secrets.SN_ORCHESTRATION_TOOL_ID }}'
+          context-github: '${{ toJSON(github) }}'
+          job-name: ServiceNow Security Scan Results3
+          security-result-attributes: '{"scanner": "Veracode", "applicationName": "10kflaws-72"}'
+          scanner: Scanning tool and is required e.g. Veracode.
+          applicationName: >-
+            Name of your Veracode application and is required. This attribute is
+            applicable only for Veracode.
+          buildVersion: >-
+            Veracode Scan name /build version and is optional. This attribute is
+            applicable only for Veracode.
+          securityToolId: >-
+            Security tool onboarded in ServiceNow (sys_id of the onboarded
+            security tool) and is optional. 
   registerPackage:
     name: Register Package
     needs:
