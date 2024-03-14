@@ -24,7 +24,7 @@ jobs:
       - name: Run Tests with Maven
         run: mvn -B test --file pom.xml
       - name: ServiceNow DevOps Unit Test Results
-        uses: ServiceNow/servicenow-devops-test-report@dev
+        uses: ServiceNow/servicenow-devops-test-report@v3.1.0
         with:
           devops-integration-token: '${{ secrets.SN_DEVOPS_TOKEN }}'
           instance-url: '${{ secrets.SN_INSTANCE_URL }}'
@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ServiceNow DevOps Register Artifact
-        uses: ServiceNow/servicenow-devops-register-artifact@dev
+        uses: ServiceNow/servicenow-devops-register-artifact@v3.1.0
         with:
           devops-integration-token: '${{ secrets.SN_DEVOPS_TOKEN }}'
           instance-url: '${{ secrets.SN_INSTANCE_URL }}'
@@ -58,7 +58,7 @@ jobs:
         uses: actions/checkout@v4.0.0
       # - name: ServiceNow DevOps Sonar Scan Results
       - name: Sonar One
-        uses: ServiceNow/servicenow-devops-sonar@dev
+        uses: ServiceNow/servicenow-devops-sonar@v3.1.0
         with:
           instance-url: '${{ secrets.SN_INSTANCE_URL }}'
           devops-integration-token: '${{ secrets.SN_DEVOPS_TOKEN }}'
@@ -75,7 +75,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.0.0
       - name: Sonar Two
-        uses: ServiceNow/servicenow-devops-sonar@dev
+        uses: ServiceNow/servicenow-devops-sonar@v3.1.0
         with:
           instance-url: '${{ secrets.SN_INSTANCE_URL }}'
           devops-integration-token: '${{ secrets.SN_DEVOPS_TOKEN }}'
@@ -90,7 +90,7 @@ jobs:
     needs: sonarScan1
     steps:
       - name: ServiceNow DevOps Security Results
-        uses: ServiceNow/servicenow-devops-security-result@dev
+        uses: ServiceNow/servicenow-devops-security-result@v3.1.0
         with:
           devops-integration-token: '${{ secrets.SN_DEVOPS_TOKEN }}'
           instance-url: '${{ secrets.SN_INSTANCE_URL }}'
@@ -115,7 +115,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ServiceNow DevOps Register Package
-        uses: ServiceNow/servicenow-devops-register-package@dev
+        uses: ServiceNow/servicenow-devops-register-package@v3.1.0
         with:
           devops-integration-token: '${{ secrets.SN_DEVOPS_TOKEN }}'
           instance-url: '${{ secrets.SN_INSTANCE_URL }}'
@@ -162,7 +162,7 @@ jobs:
       change-request-number: '${{ steps.get_change.outputs.change-request-number }}'
     steps:
       - name: ServiceNow DevOps Get Change
-        uses: ServiceNow/servicenow-devops-get-change@dev
+        uses: ServiceNow/servicenow-devops-get-change@v3.1.0
         id: get_change
         with:
           instance-url: '${{ secrets.SN_INSTANCE_URL }}'
@@ -176,7 +176,7 @@ jobs:
     name: ServiceNow DevOps Update Change
     steps:
       - name: ServiceNow DevOps Update Change
-        uses: ServiceNow/servicenow-devops-update-change@dev
+        uses: ServiceNow/servicenow-devops-update-change@v3.1.0
         id: update_change
         with:
           instance-url: '${{ secrets.SN_INSTANCE_URL }}'
