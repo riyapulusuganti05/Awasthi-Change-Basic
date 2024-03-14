@@ -86,7 +86,7 @@ jobs:
   ServiceNowSecurityScanResults:
     runs-on: ubuntu-latest
     name: ServiceNow Security Scan Results
-    needs: sonarScan
+    needs: sonarScan1
     steps:
       - name: ServiceNow DevOps Security Results
         uses: ServiceNow/servicenow-devops-security-result@dev
