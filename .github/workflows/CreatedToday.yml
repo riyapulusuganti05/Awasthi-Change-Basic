@@ -51,7 +51,7 @@ jobs:
             }}.0", "repositoryName": "${{ github.repository }}" } ]
   sonarScan:
     name: Sonar Scan
-    needs: registerPackage
+    needs: registerArtifact
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
