@@ -167,7 +167,7 @@ jobs:
 
   registerPackage:
     name: 'Register Package'
-    needs: [registerArtifact]
+    needs: [ServiceNowSecurityScanResults]
     runs-on: ubuntu-latest
     steps:
     - name: ServiceNow DevOps Register Package
@@ -200,7 +200,7 @@ jobs:
 
   change:
     name: Change Request
-    needs: test
+    needs: registerPackage
     runs-on: ubuntu-latest
     steps:     
       - name: ServiceNow DevOps Change Attributes
@@ -213,7 +213,7 @@ jobs:
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           context-github: ${{ toJSON(github) }}
           job-name: 'Change Request'
-          change-request: '{"setCloseCode":"true","attributes":{"short_description":"Automated Software Deployment","chg_model":"007c4001c343101035ae3f52c1d3aeb","description":"Automated Software Deployment.","assignment_group":"a715cd759f2002002920bde8132e7018","implementation_plan":"Software update is tested and results can be found in Test Summaries Tab; When the change is approved the implementation happens automated by the CICD pipeline within the change planned start and end time window.","backout_plan":"When software fails in production, the previous software release will be re-deployed.","test_plan":"Testing if the software was successfully deployed"}}'
+          change-request: '{"setCloseCode":"true","attributes":{"short_description":"Automated Software Deployment","chg_model":"007c4001c343101035ae3f52c1d3aeb2","description":"Automated Software Deployment.","assignment_group":"a715cd759f2002002920bde8132e7018","implementation_plan":"Software update is tested and results can be found in Test Summaries Tab; When the change is approved the implementation happens automated by the CICD pipeline within the change planned start and end time window.","backout_plan":"When software fails in production, the previous software release will be re-deployed.","test_plan":"Testing if the software was successfully deployed"}}'
           interval: '100'
           # timeout: '3600'
           changeCreationTimeOut: '1000'
