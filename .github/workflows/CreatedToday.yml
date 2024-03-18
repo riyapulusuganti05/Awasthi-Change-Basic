@@ -258,7 +258,7 @@ jobs:
           devops-integration-user-password: '${{ secrets.SN_DEVOPS_PASSWORD }}'
           tool-id: '${{ secrets.SN_ORCHESTRATION_TOOL_ID }}'
           context-github: '${{ toJSON(github) }}'
-          change-details: '{"build_number":"","pipeline_name":"","stage_name":"Deploy"}'
+          change-details: '{"build_number":"","pipeline_name":"","stage_name":"Change Request"}'
   updatechange:
     needs: getchange
     runs-on: ubuntu-latest
