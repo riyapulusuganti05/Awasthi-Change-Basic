@@ -33,7 +33,7 @@ jobs:
           tool-id: '${{ secrets.SN_ORCHESTRATION_TOOL_ID }}'
           job-name: Test
           context-github: '${{ toJSON(github) }}'
-          xml-report-filename: target/
+          xml-report-filename: testng.xml
   registerArtifact:
     name: RegisterArtifact
     needs: test
