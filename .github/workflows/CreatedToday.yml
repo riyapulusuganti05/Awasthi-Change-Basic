@@ -47,7 +47,7 @@ jobs:
           devops-integration-user-password: '${{ secrets.SN_DEVOPS_PASSWORD }}'
           instance-url: '${{ secrets.SN_INSTANCE_URL }}'
           tool-id: '${{ secrets.SN_ORCHESTRATION_TOOL_ID }}'
-          job-name: Register Artifact
+          job-name: RegisterArtifact
           context-github: '${{ toJSON(github) }}'
           artifacts: >-
             [ { "name": "app-devops-cicd.jar", "version": "1.${{
