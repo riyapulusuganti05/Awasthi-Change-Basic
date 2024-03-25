@@ -34,25 +34,25 @@ jobs:
           job-name: Test
           context-github: '${{ toJSON(github) }}'
           xml-report-filename: .github/workflows/JestFolder/jest-junit.xml
-  # registerArtifact:
-  #   name: RegisterArtifact
-  #   needs: test
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: ServiceNow DevOps Register Artifact
-  #       uses: ServiceNow/servicenow-devops-register-artifact@v3.1.0
-  #       with:
-  #         devops-integration-token: '${{ secrets.SN_DEVOPS_TOKEN }}'
-  #         devops-integration-user-name: '${{ secrets.SN_DEVOPS_USER }}'
-  #         devops-integration-user-password: '${{ secrets.SN_DEVOPS_PASSWORD }}'
-  #         instance-url: '${{ secrets.SN_INSTANCE_URL }}'
-  #         tool-id: '${{ secrets.SN_ORCHESTRATION_TOOL_ID }}'
-  #         job-name: RegisterArtifact
-  #         context-github: '${{ toJSON(github) }}'
-  #         artifacts: >-
-  #           [ { "name": "app-devops-cicd.jar", "version": "1.${{
-  #           github.run_number }}", "semanticVersion": "1.${{ github.run_number
-  #           }}.0", "repositoryName": "${{ github.repository }}" } ]
+  registerArtifact:
+    name: RegisterArtifact
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: ServiceNow DevOps Register Artifact
+        uses: ServiceNow/servicenow-devops-register-artifact@v3.1.0
+        with:
+          devops-integration-token: '${{ secrets.SN_DEVOPS_TOKEN }}'
+          devops-integration-user-name: '${{ secrets.SN_DEVOPS_USER }}'
+          devops-integration-user-password: '${{ secrets.SN_DEVOPS_PASSWORD }}'
+          instance-url: '${{ secrets.SN_INSTANCE_URL }}'
+          tool-id: '${{ secrets.SN_ORCHESTRATION_TOOL_ID }}'
+          job-name: RegisterArtifact
+          context-github: '${{ toJSON(github) }}'
+          artifacts: >-
+            [ { "name": "app-devops-cicd.jar", "version": "1.${{
+            github.run_number }}", "semanticVersion": "1.${{ github.run_number
+            }}.0", "repositoryName": "${{ github.repository }}" } ]
   # sonarScan1:
   #   name: Sonar Scan1
   #   needs: registerArtifact
@@ -228,7 +228,7 @@ jobs:
           context-github: '${{ toJSON(github) }}'
           job-name: Change Request
           change-request: >-
-            {"setCloseCode":"true","attributes":{"short_description":"Automated
+            {"autoCloseChange":"true","attributes":{"short_description":"Automated
             Software
             Deployment","chg_model":"007c4001c343101035ae3f52c1d3aeb2","description":"Automated
             Software
