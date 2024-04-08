@@ -254,7 +254,7 @@ jobs:
           # start_date: Enter the planned start date
           # end_date: Enter the planned end date
 
-  registerArtifact:
+   registerArtifact:
     name: 'Register Artifact'
     needs: change
     runs-on: ubuntu-latest
