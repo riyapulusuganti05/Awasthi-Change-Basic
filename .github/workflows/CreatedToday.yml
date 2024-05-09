@@ -345,7 +345,7 @@ jobs:
  
   deploy:
     name: 'Deploy'
-    needs: getchange
+    needs: updatechange
     runs-on: ubuntu-latest
     steps:
     - name: Run deployment scripts
