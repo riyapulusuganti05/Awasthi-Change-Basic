@@ -161,59 +161,59 @@ jobs:
          # Sonar Project Key
          sonar-project-key: ${{ secrets.SONAR_PROJECT_KEY }}
 
-  # ServiceNowSecurityScanResults:
-  #   # type of machine to run the job on
-  #   runs-on: ubuntu-latest
-  #   name: ServiceNow Security Scan Results
-  #   needs: sonarScan
-  #   steps:
-  #     - name: ServiceNow DevOps Security Results
-  #       uses: ServiceNow/servicenow-devops-security-result@v3.1.0
-  #       with:
-  #           # DevOps Integration Token of GitHub tool created in ServiceNow instance for token based authentication.
-  #           # devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
-  #           devops-integration-user-name: '${{ secrets.SN_DEVOPS_USER }}'
-  #           devops-integration-user-password: '${{ secrets.SN_DEVOPS_PASSWORD }}'
-  #           # ServiceNow Instance URL
-  #           instance-url: ${{ secrets.SN_INSTANCE_URL }}
-  #           # Orchestration Tool Id
-  #           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-  #           # GitHub Context
-  #           context-github: ${{ toJSON(github) }}
-  #           # Display Name of the Job
-  #           job-name: 'ServiceNow Security Scan Results'
-  #           security-result-attributes: '{"scanner": "Veracode", "applicationName": "10kflaws-72"}'
-            # scanner: Scanning tool and is required e.g. Veracode.
-            # applicationName: Name of your Veracode application and is required. This attribute is applicable only for Veracode.
-            # buildVersion: Veracode Scan name / build version and is optional. This attribute is applicable only for Veracode.
-            # securityToolId: Security tool onboarded in ServiceNow (sys_id of the onboarded security tool) and is optional.
-  # change:
-  #   # jobs that must complete successfully before this job will run
-  #   needs: sonarScan
-  #   # type of machine to run the job on
-  #   runs-on: ubuntu-latest
-  #   name: 'ServiceNow DevOps Change'
-  #   steps:
-  #     - name: ServiceNow Change
-  #       uses: ServiceNow/servicenow-devops-change@dev
-  #       with:
-  #         # Devops Integration Token
-  #         # devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
-  #         devops-integration-user-name: '${{ secrets.SN_DEVOPS_USER }}'
-  #         devops-integration-user-password: '${{ secrets.SN_DEVOPS_PASSWORD }}'
-  #         # ServiceNow Instance URL
-  #         instance-url: ${{ secrets.SN_INSTANCE_URL }}
-  #         # Orchestration Tool Id
-  #         tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-  #         # GitHub Context
-  #         context-github: ${{ toJSON(github) }}
-  #         # Display Name of the Job
-  #         job-name: 'ServiceNow DevOps Change'
-  #         change-request: '{"autoCloseChange":true,"attributes":{"short_description":"Automated Software Deployment","chg_model":"007c4001c343101035ae3f52c1d3aeb2","description":"Automated Test Software Deployment.","assignment_group":"a715cd759f2002002920bde8132e7018","implementation_plan":"Software update is tested and results can be found in Test Summaries Tab; When the change is approved the implementation happens automated by the CICD pipeline within the change planned start and end time window.","backout_plan":"When software fails in production, the previous software release will be re-deployed.","test_plan":"Testing if the software was successfully deployed"}}'
-  #         interval: '10'
-  #         timeout: '3600'
-  #         changeCreationTimeOut: ;'10'
-  #         abortOnChangeCreationFailure: false
+  ServiceNowSecurityScanResults:
+    # type of machine to run the job on
+    runs-on: ubuntu-latest
+    name: ServiceNow Security Scan Results
+    needs: sonarScan
+    steps:
+      - name: ServiceNow DevOps Security Results
+        uses: ServiceNow/servicenow-devops-security-result@v3.1.0
+        with:
+            # DevOps Integration Token of GitHub tool created in ServiceNow instance for token based authentication.
+            # devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
+            devops-integration-user-name: '${{ secrets.SN_DEVOPS_USER }}'
+            devops-integration-user-password: '${{ secrets.SN_DEVOPS_PASSWORD }}'
+            # ServiceNow Instance URL
+            instance-url: ${{ secrets.SN_INSTANCE_URL }}
+            # Orchestration Tool Id
+            tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+            # GitHub Context
+            context-github: ${{ toJSON(github) }}
+            # Display Name of the Job
+            job-name: 'ServiceNow Security Scan Results'
+            security-result-attributes: '{"scanner": "Veracode", "applicationName": "10kflaws-72"}'
+            scanner: Scanning tool and is required e.g. Veracode.
+            applicationName: Name of your Veracode application and is required. This attribute is applicable only for Veracode.
+            buildVersion: Veracode Scan name / build version and is optional. This attribute is applicable only for Veracode.
+            securityToolId: Security tool onboarded in ServiceNow (sys_id of the onboarded security tool) and is optional.
+  change:
+    # jobs that must complete successfully before this job will run
+    needs: sonarScan
+    # type of machine to run the job on
+    runs-on: ubuntu-latest
+    name: 'ServiceNow DevOps Change'
+    steps:
+      - name: ServiceNow Change
+        uses: ServiceNow/servicenow-devops-change@dev
+        with:
+          # Devops Integration Token
+          # devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
+          devops-integration-user-name: '${{ secrets.SN_DEVOPS_USER }}'
+          devops-integration-user-password: '${{ secrets.SN_DEVOPS_PASSWORD }}'
+          # ServiceNow Instance URL
+          instance-url: ${{ secrets.SN_INSTANCE_URL }}
+          # Orchestration Tool Id
+          tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+          # GitHub Context
+          context-github: ${{ toJSON(github) }}
+          # Display Name of the Job
+          job-name: 'ServiceNow DevOps Change'
+          change-request: '{"autoCloseChange":true,"attributes":{"short_description":"Automated Software Deployment","chg_model":"007c4001c343101035ae3f52c1d3aeb2","description":"Automated Test Software Deployment.","assignment_group":"a715cd759f2002002920bde8132e7018","implementation_plan":"Software update is tested and results can be found in Test Summaries Tab; When the change is approved the implementation happens automated by the CICD pipeline within the change planned start and end time window.","backout_plan":"When software fails in production, the previous software release will be re-deployed.","test_plan":"Testing if the software was successfully deployed"}}'
+          interval: '10'
+          timeout: '3600'
+          changeCreationTimeOut: ;'10'
+          abortOnChangeCreationFailure: false
 
   registerPackage:
     name: 'Register Package'
