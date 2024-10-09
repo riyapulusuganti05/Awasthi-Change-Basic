@@ -55,7 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.0.0
+        uses: actions/checkout@main
       - name: ServiceNow DevOps Sonar Scan Results
         uses: ServiceNow/servicenow-devops-sonar@main
         with:
@@ -113,7 +113,7 @@ jobs:
           tool-id: '${{ secrets.SN_ORCHESTRATION_TOOL_ID }}'
           context-github: '${{ toJSON(github) }}'
           job-name: ServiceNow Security Scan Results
-          security-result-attributes: '{"scanner": "Veracode", "applicationName": "10kflaws-72"}'
+          security-result-attributes: '{"scanner": "Veracode", "applicationName": "VeraDemo10"}'
           scanner: Scanning tool and is required e.g. Veracode.
           applicationName: >-
             Name of your Veracode application and is required. This attribute is
@@ -191,7 +191,7 @@ jobs:
     name: ServiceNow DevOps Update Change
     steps:
       - name: ServiceNow DevOps Update Change
-        uses: ServiceNow/servicenow-devops-update-change@dev
+        uses: ServiceNow/servicenow-devops-update-change@main
         id: update_change
         with:
           instance-url: '${{ secrets.SN_INSTANCE_URL }}'
